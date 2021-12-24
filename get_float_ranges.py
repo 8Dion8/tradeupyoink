@@ -16,7 +16,10 @@ weapon_select = Select(driver.find_element_by_id("selWeapon"))
 
 for weapon_name in weapon_names:
     skin_names = []
+
     weapon_select.select_by_visible_text(weapon_name)
+
+    data[weapon_name] = {}
 
     skin_select = Select(driver.find_element_by_id("selSkin"))
 
@@ -25,8 +28,12 @@ for weapon_name in weapon_names:
     for option in skin_select.options:
         if option.text == "All":continue
 
-        skin_select.select_by_visible_text(option.text)
+        skin_name = option.text
+
+        skin_select.select_by_visible_text(skin_name)
         skin_max_float = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[1]/div[6]/div[2]/div[1]/div/div").text[4:]
         skin_min_float = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[1]/div[6]/div[2]/div[2]/div/div").text[4:]
 
-        print(f"{weapon_name} {option.text}: MAX {skin_max_float} ; MIN {skin_min_float}")
+        print(f"{weapon_name} {skin_name}: MAX {skin_max_float} ; MIN {skin_min_float}")
+
+        data[weapon_name][skin_name] = [skin_max_float, skin_min_float]
