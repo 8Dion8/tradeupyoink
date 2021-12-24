@@ -26,4 +26,7 @@ for weapon_name in weapon_names:
         if option.text == "All":continue
 
         skin_select.select_by_visible_text(option.text)
-        
+        skin_max_float = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[1]/div[6]/div[2]/div[1]/div/div").text[4:]
+        skin_min_float = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[1]/div[6]/div[2]/div[2]/div/div").text[4:]
+
+        print(f"{weapon_name} {option.text}: MAX {skin_max_float} ; MIN {skin_min_float}")
