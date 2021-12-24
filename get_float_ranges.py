@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+import json
 
 data = {}
 
@@ -37,3 +38,7 @@ for weapon_name in weapon_names:
         print(f"{weapon_name} {skin_name}: MAX {skin_max_float} ; MIN {skin_min_float}")
 
         data[weapon_name][skin_name] = [skin_max_float, skin_min_float]
+
+
+with open("float_ranges.json", "w") as fp:
+    json.dump(data, fp)
